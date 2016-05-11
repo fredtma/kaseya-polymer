@@ -1,0 +1,42 @@
+{
+  "name": "kaseya-application-interphase",
+  "private": true,
+  "authors": [
+    "fredtma <tshimanga@gmail.com>"
+  ],
+  "description": "api application to the kaseya webservice",
+  "main": "www/index.html",
+  "moduleType": [],
+  "keywords": [
+    "api",
+    "polymer",
+    "soap"
+  ],
+  "license": "MIT",
+  "homepage": "www.xpandit.co.za",
+  "dependencies": {
+    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
+    "neon-elements": "PolymerElements/neon-elements#^1.0.0",
+    "page": "visionmedia/page.js#~1.6.4",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.1",
+    "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
+    "polymer": "Polymer/polymer#^1.2.0",
+    "paper-menu": "PolymerElements/paper-menu#4fecb43601",
+    "jquery.soap": "^1.6.7",
+    "jquery": "^2.2.0",
+    "more-routing": "Polymore/more-routing#^1.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "*"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "resolutions": {
+    "paper-menu": "4fecb43601"
+  }
+}

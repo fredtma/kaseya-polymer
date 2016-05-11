@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+
+<dom-module id="page-login">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-card {
+        width:100%;
+        --paper-card-background-color: #ffffff;
+      }
+    </style>
+
+
+      <paper-card heading="Login Form" animated-shadow elevation="5">
+        <form is="iron-form" id="form" method="post" action="/form/handler">
+          <div class="card-content">
+            <paper-input type="email" label="Email Address" required value="{{model.username}}" name="username">
+              <paper-icon-button suffix icon="mail"></paper-icon-button>
+            </paper-input>
+
+
+
+            <paper-input type="password" label="Password" char-counter required value="{{model.password}}" name="password">
+              <paper-icon-button suffix icon="lock"></paper-icon-button>
+            </paper-input>
+          </div>
+          <div class="card-actions">
+            <paper-button onclick="submitForm()">
+              Submit
+            </paper-button>
+          </div>
+        </form>
+      </paper-card>
+
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'page-login',
+
+      properties: {
+        foo: {
+          type: String,
+          value: 'page-login',
+          notify: true
+        }
+      },
+      ready:ready
+    });
+
+    function ready()
+    {
+      this.model = {};
+    }
+  })();
+  </script>
+</dom-module>
