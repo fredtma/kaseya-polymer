@@ -21,6 +21,7 @@
   });
 
   window.addEventListener('WebComponentsReady', function() {
+    
     // imports are loaded and elements have been registered
   });
 

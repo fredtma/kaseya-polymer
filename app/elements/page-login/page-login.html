@@ -12,7 +12,7 @@
         display: block;
       }
       paper-card {
-        width:100%;
+        width: 100%;
         --paper-card-background-color: #ffffff;
       }
     </style>
@@ -54,12 +54,13 @@
           notify: true
         }
       },
-      ready:ready
+      ready: Ready
     });
 
-    function ready()
+    function Ready()
     {
-      this.model = {};
+      var self = this;
+      self.model = {};
     }
   })();
   </script>

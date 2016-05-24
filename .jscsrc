@@ -4,5 +4,6 @@
   "disallowTrailingWhitespace": null,
   "maximumLineLength": 100,
   "excludeFiles": ["node_modules/**"],
-  "validateIndentation": null
+  "validateIndentation": null,
+  "disallowNewlineBeforeBlockStatements": ["else", "catch", "finally"]
 }

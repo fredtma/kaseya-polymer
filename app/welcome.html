@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Polymer Starter Kit"/>
+  <title>Kaseya Application Interphase</title>
+  <meta name="theme-color" content="#2E3AA1">
+  <link rel="manifest" href="manifest.json">
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="XpandKaseya">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="XpandKaseya">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="elements/elements.html">
+  <style is="custom-style" include="shared-styles"></style>
+
+  <link rel="import" href="../bower_components/paper-input/paper-input.html">
+  <link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+  <link rel="import" href="../bower_components/iron-form/iron-form.html">
+  <style>
+    :host {
+      display: block;
+    }
+    paper-card {
+      width: 50%;
+      margin: 1em auto;
+      background: #ffffff;
+      --paper-card-background-color: #ffffff;
+    }
+  </style>
+</head>
+
+  <body unresolved class="fullbleed layout vertical">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
+      <paper-header-panel class="flex">
+
+        <paper-toolbar class="tall">
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+          <h1 class="title">Login</h1>
+          <span class="middle title">XpandIT and Kaseya</span>
+        </paper-toolbar>
+
+        <div class="content-">
+          <paper-card heading="Login Form" animated-shadow elevation="5">
+              <form is="iron-form" id="form" method="post" action="/form/handler">
+                <div class="card-content">
+                  <paper-input type="email" label="Email Address" required value="{{model.username}}" name="username">
+                    <paper-icon-button suffix icon="mail"></paper-icon-button>
+                  </paper-input>
+
+
+
+                  <paper-input type="password" label="Password" char-counter required value="{{model.password}}" name="password">
+                    <paper-icon-button suffix icon="lock"></paper-icon-button>
+                  </paper-input>
+                </div>
+                <div class="card-actions">
+                  <paper-button onclick="submitForm()">
+                    Submit
+                  </paper-button>
+                </div>
+              </form>
+          </paper-card>
+        </div>
+      </paper-header-panel>
+
+    </template>
+    <!--<script src="scripts/app.js"></script>-->
+  </body>
+</html>
