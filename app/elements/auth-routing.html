@@ -2,50 +2,45 @@
 <script>
   window.addEventListener('WebComponentsReady', function() {
 
-    // We use Page.js for routing. This is a Micro
-    // client-side router inspired by the Express router
-    // More info: https://visionmedia.github.io/page.js/
-
     // Removes end / from app.baseUrl which page.base requires for production
     if (window.location.port === '') {  // if production
       page.base(app.baseUrl.replace(/\/$/, ''));
     }
 
-    // Routes
-    page('*', function(ctx, next) {
+    // Middleware
+    function scrollToTop(ctx, next) {
+      app.scrollPageToTop();
       next();
-    });
+    }
 
-    page('/', function() {
-      app.route = 'login';
-    });
+    function closeDrawer(ctx, next) {
+      app.closeDrawer();
+      next();
+    }
 
-    page('/auth/*', function() {
-      app.route = 'auth';
-    });
+    // Routes
+//    page('*', scrollToTop, closeDrawer, function(ctx, next) {
+//      next();
+//    });
 
-    page('/login', function() {
-      app.route = 'login';
-    });
-
-    page(app.baseUrl, function() {
-      app.route = 'home';
-    });
-
-    page('/users', function() {
+    page('/auth/users', function() {
       app.route = 'users';
     });
 
-    page('/users/:name', function(data) {
+    page('/auth/users/:name', function(data) {
       app.route = 'user-info';
       app.params = data.params;
+    });
+
+    page('/auth/contact', function() {
+      app.route = 'contact';
     });
 
     // 404
     page('*', function() {
       app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
       app.$.toast.show();
-      page.redirect('/login');
+      page.redirect('/');
     });
 
     // add #! before urls

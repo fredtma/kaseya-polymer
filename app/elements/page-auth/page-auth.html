@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../auth-elements.html">
 
 <dom-module id="page-auth">
   <template>
@@ -23,17 +24,17 @@
             <span>Home</span>
           </a>
 
-          <a data-route="users" href="users">
+          <a data-route="users" href="/auth/users">
             <iron-icon icon="info"></iron-icon>
             <span>Users</span>
           </a>
 
-          <a data-route="contact" href="contact">
+          <a data-route="contact" href="/auth/contact">
             <iron-icon icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
 
-          <a data-route="login" href="login">
+          <a data-route="login" href="/login">
             <iron-icon icon="mail"></iron-icon>
             <span>Login</span>
           </a>
@@ -69,12 +70,10 @@
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
             <page-login data-route="login"></page-login>
 
-            <section data-route="home">
+            <section data-route="auth-home">
               <paper-material elevation="1">
-                <my-greeting></my-greeting>
 
                 <p class="paper-font-subhead">You now have:</p>
-                <my-list></my-list>
 
                 <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
               </paper-material>
@@ -113,19 +112,51 @@
 
   </template>
   <script>
-    (function () {
+    (function() {
       'use strict';
-      var properties = {
+
+      let properties = {
         page: {
           type: String,
           value: 'page-auth',
           notify: true
+        },
+        route:{
+          type: String,
+          value: 'auth-home'
         }
       };
 
       Polymer({
         is: 'page-auth',
         properties: properties
+      });
+      // Main area's paper-scroll-header-panel custom condensing transformation of
+      // the appName in the middle-container and the bottom title in the bottom-container.
+      // The appName is moved to top and shrunk on condensing. The bottom sub title
+      // is shrunk to nothing on condensing.
+      window.addEventListener('paper-header-transform--', function(e) {
+        var appName         = Polymer.dom(document).querySelector('#mainToolbar .app-name');
+        var middleContainer = Polymer.dom(document).querySelector('#mainToolbar .middle-container');
+        var bottomContainer = Polymer.dom(document).querySelector('#mainToolbar .bottom-container');
+        var detail          = e.detail;
+        var heightDiff      = detail.height - detail.condensedHeight;
+        var yRatio          = Math.min(1, detail.y / heightDiff);
+        // appName max size when condensed. The smaller the number the smaller the condensed size.
+        var maxMiddleScale  = 0.50;
+        var auxHeight       = heightDiff - detail.y;
+        var auxScale        = heightDiff / (1 - maxMiddleScale);
+        var scaleMiddle     = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
+        var scaleBottom     = 1 - yRatio;
+
+        // Move/translate middleContainer
+        Polymer.Base.transform('translate3d(0,' + yRatio * 100 + '%,0)', middleContainer);
+
+        // Scale bottomContainer and bottom sub title to nothing and back
+        Polymer.Base.transform('scale(' + scaleBottom + ') translateZ(0)', bottomContainer);
+
+        // Scale middleContainer appName
+        Polymer.Base.transform('scale(' + scaleMiddle + ') translateZ(0)', appName);
       });
     })();
   </script>

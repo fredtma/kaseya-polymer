@@ -50,9 +50,20 @@
 </head>
 
 <body unresolved class="fullbleed layout vertical">
+  <app-location route="{{route}}"></app-location>
+  <app-route
+    route="{{route}}"
+    pattern="/:auth"
+    data="{{routeData}}"
+    tail="{{subroute}}"></app-route>
+
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
+    <iron-pages attr-for-selected="data-route" selected="{{route}}">
+      <page-login data-route="login"></page-login>
+      <page-auth data-route="auth"></page-auth>
+    </iron-pages>
 
     <paper-toast id="toast">
       <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
